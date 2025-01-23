@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Entity;
 
+use Symfony\Component\Serializer\Annotation\Groups;
 use App\Repository\ActivityTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -11,6 +11,7 @@ class ActivityType
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
