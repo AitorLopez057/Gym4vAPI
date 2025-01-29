@@ -13,15 +13,7 @@ use App\Entity\Monitor;
 
 final class MonitorController extends AbstractController
 {
-    
-    //#[Route('/monitors', name: 'get_monitor')]
-    //public function getMonitors(): JsonResponse
-    //{
-    //    return $this->json([
-    //        'message' => 'Welcome to your new controller!',
-    //        'path' => 'src/Controller/MonitorController.php',
-    //    ]);
-    //}
+
     private MonitorService $monitorService;
 
     public function __construct(MonitorService $monitorService)
