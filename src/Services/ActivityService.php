@@ -14,25 +14,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ActivityService
 {
 
-//public function __construct(private EntityManagerInterface $entityManager)
-//{}
-//
-//public function getAllActivities(): array
-//{
-//    return $this->entityManager->getRepository(Activity::class)->findAll();
-//}
-//
-//public function getActivityByDate(DateTimeInterface $date): array
-//{
-//    $formattedDate = $date->format('Y-m-d');
-//    return $this->entityManager->getRepository(Activity::class)->createQueryBuilder('a')
-//        ->where('a.date_start >= :dateStart')
-//        ->setParameter('dateStart', $formattedDate)
-//        ->getQuery()
-//        ->getResult();
-//}
-//
-
 private EntityManagerInterface $entityManager;
 private EntityRepository $activityRepository;
 private EntityRepository $activityTypeRepository;
@@ -84,8 +65,6 @@ public function __construct(EntityManagerInterface $entityManager)
 
         return $activity;
     }
-
-    
 
     public function updateActivity(int $id, array $data): Activity
     {

@@ -6,8 +6,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ActivityTypeService
 {
-    
-
     public function __construct(private EntityManagerInterface $entityManager)
     {}
 

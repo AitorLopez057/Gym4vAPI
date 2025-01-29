@@ -15,8 +15,8 @@ class ActivityNewDTO
 
         #[Assert\NotBlank]
         #[Assert\Count(
-            min: 2,
-            max: 2,
+            min: 2, // No se como validarlo correctamente
+            max: 2, // No se como validarlo correctamente
             minMessage: "Debes seleccionar 2 monitores",
             maxMessage: "Debes seleccionar 2 monitores"
         )]
@@ -32,6 +32,7 @@ class ActivityNewDTO
     ) {
         $this->validateDateConstraints();
     }
+
 
     public function validateDateConstraints(): void
     {
