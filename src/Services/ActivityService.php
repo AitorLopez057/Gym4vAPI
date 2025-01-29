@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use DateTimeInterface;
 
+
 class ActivityService
 {
     public function __construct(private EntityManagerInterface $entityManager)
@@ -16,8 +17,16 @@ class ActivityService
         return $this->entityManager->getRepository(Activity::class)->findAll();
     }
 
-    public function getActivityByDate(DateTime $date): array
+    public function getActivityByDate(DateTimeInterface $date): array
     {
-        return $this->entityManager->getRepository(Activity::class)->findBy(['datestart' => $date]);
+        $formattedDate = $date->format('Y-m-d');
+        return $this->entityManager->getRepository(Activity::class)->createQueryBuilder('a')
+            ->where('a.date_start >= :dateStart')
+            ->setParameter('dateStart', $formattedDate)
+            ->getQuery()
+            ->getResult();
     }
+
+
+
 }

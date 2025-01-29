@@ -26,10 +26,10 @@ class Activity
     private Collection $monitor;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private \DateTimeInterface $datestart;
+    private \DateTimeInterface $date_start;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private \DateTimeInterface $dateend;
+    private \DateTimeInterface $date_end;
 
     public function __construct()
     {
@@ -86,24 +86,24 @@ class Activity
 
     public function getDateStart(): ?\DateTimeInterface
     {
-        return $this->datestart;
+        return $this->date_start;
     }
 
-    public function setDateStart(\DateTimeInterface $datestart): static
+    public function setDateStart(\DateTimeInterface $date_start): static
     {
-        $this->datestart = $datestart;
+        $this->date_start = $date_start;
 
         return $this;
     }
 
     public function getDateEnd(): ?\DateTimeInterface
     {
-        return $this->dateend;
+        return $this->date_end;
     }
 
-    public function setDateEnd(\DateTimeInterface $dateend): static
+    public function setDateEnd(\DateTimeInterface $date_end): static
     {
-        $this->dateend = $dateend;
+        $this->date_end = $date_end;
 
         return $this;
     }

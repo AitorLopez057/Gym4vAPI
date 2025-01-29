@@ -17,8 +17,8 @@ class ActivityType
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column]
-    private ?int $required_monitors = null;
+    #[ORM\Column(name: "number_monitors", type: "integer")]
+    private ?int $requiredMonitors = null;
 
 
     public function getId(): ?int
@@ -47,12 +47,12 @@ class ActivityType
 
     public function getRequiredMonitors(): ?int
     {
-        return $this->required_monitors;
+        return $this->requiredMonitors;
     }
 
-    public function setRequiredMonitors(int $required_monitors): static
+    public function setRequiredMonitors(int $requiredMonitors): static
     {
-        $this->required_monitors = $required_monitors;
+        $this->requiredMonitors = $requiredMonitors;
 
         return $this;
     }

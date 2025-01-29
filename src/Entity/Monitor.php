@@ -103,10 +103,7 @@ class Monitor
     /**
      * @return Collection<int, Activity>
      */
-    public function getActivities(): Collection
-    {
-        return $this->activities;
-    }
+
 
     public function addActivity(Activity $activity): static
     {
