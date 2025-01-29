@@ -9,35 +9,44 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class ActivityNewDTO
 {
     public function __construct(
-        public int $id,
-
-        // Cambiar al número de monitores por el tipo de actividad
-        #[Assert\Count(min:2, 
-                        max:2, 
-                        minMessage: 'Debes seleccionar 2 monitores', 
-                        maxMessage: 'Debes seleccionar 2 monitores')]
-        public array $monitor,
+        #[Assert\NotBlank]
+        #[Assert\Type("int")]
         public int $activityType,
 
-        // Validar que la hora de inicio sea 09:00, 13:30 o 17:30
-        public \DateTime $dateStart,
-        public \DateTime $dateEnd
-    ){}
-    
+        #[Assert\NotBlank]
+        #[Assert\Count(
+            min: 2,
+            max: 2,
+            minMessage: "Debes seleccionar 2 monitores",
+            maxMessage: "Debes seleccionar 2 monitores"
+        )]
+        public array $monitor,
 
-    public function validateDateStart(ExecutionContextInterface $context): void
+        #[Assert\NotBlank]
+        #[Assert\Type("datetime")]
+        public \DateTime $dateStart,
+
+        #[Assert\NotBlank]
+        #[Assert\Type("datetime")]
+        public \DateTime $dateEnd
+    ) {
+        $this->validateDateConstraints();
+    }
+
+    public function validateDateConstraints(): void
     {
-        // Extraer la hora y los minutos de dateStart
+        // Validar horarios permitidos
+        $validTimes = ['09:00', '13:30', '17:30'];
         $time = $this->dateStart->format('H:i');
 
-        // Horarios permitidos
-        $validTimes = ['09:00', '13:30', '17:30'];
-
-        // Validar si el tiempo está en la lista de horarios permitidos
         if (!in_array($time, $validTimes)) {
-            $context->buildViolation('La hora debe ser 09:00, 13:30 o 17:30.')
-                    ->atPath('dateStart')
-                    ->addViolation();
+            throw new \InvalidArgumentException('La hora de inicio debe ser 09:00, 13:30 o 17:30.');
+        }
+
+        // Validar duración exacta de 90 minutos
+        $interval = $this->dateStart->diff($this->dateEnd);
+        if ($interval->h !== 1 || $interval->i !== 30) {
+            throw new \InvalidArgumentException('Las clases deben durar exactamente 90 minutos.');
         }
     }
 }

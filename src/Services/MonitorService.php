@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use DateTimeInterface;
 use App\Repository\MonitorRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class MonitorService
 {
